@@ -190,48 +190,156 @@
 										</ul>
 									</form>
 								</section> -->
-								<section>
-  <div class="fields">
-    <div class="field half">
-      <label for="name">Name</label>
-      <input type="text" id="name" placeholder="Your Name" required />
-    </div>
-    <div class="field half">
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="Your Email" required />
-    </div>
-    <div class="field">
-      <label for="message">Message</label>
-      <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
-    </div>
-  </div>
-  <button id="whatsappButton" class="button submit">Send Message</button>
-</section>
+								<!-- Floating WhatsApp Button with Styled Popup -->
+<style>
+/* Floating Button */
+#whatsappChatBtn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(45deg, #25D366, #128C7E);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  font-size: 32px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  z-index: 1000;
+  transition: transform 0.3s;
+}
+#whatsappChatBtn:hover {
+  transform: scale(1.1);
+}
+
+/* Popup Form */
+#whatsappFormPopup {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  right: 25px;
+  background: #fff;
+  width: 320px;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.4s ease-in-out;
+}
+
+/* Show class for animation */
+#whatsappFormPopup.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Close button */
+#whatsappFormPopup .closeBtn {
+  float: right;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  margin-top: -8px;
+  margin-right: -8px;
+}
+
+/* Input styling */
+#whatsappFormPopup input,
+#whatsappFormPopup textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+/* Send button */
+#whatsappFormPopup button#sendWhatsApp {
+  width: 100%;
+  padding: 12px;
+  background: #25D366;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#whatsappFormPopup button#sendWhatsApp:hover {
+  background: #128C7E;
+}
+
+/* Responsive */
+@media(max-width: 400px){
+  #whatsappFormPopup { width: 90%; right: 5%; }
+}
+</style>
+
+<!-- Floating Button -->
+<button id="whatsappChatBtn">💬</button>
+
+<!-- Popup Form -->
+<div id="whatsappFormPopup">
+  <button class="closeBtn">&times;</button>
+  <input type="text" id="wName" placeholder="Your Name" required />
+  <input type="email" id="wEmail" placeholder="Your Email" required />
+  <textarea id="wMessage" rows="4" placeholder="Your Message" required></textarea>
+  <button id="sendWhatsApp">Send</button>
+</div>
 
 <script>
-document.getElementById("whatsappButton").addEventListener("click", function() {
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const message = document.getElementById("message").value.trim();
+const chatBtn = document.getElementById("whatsappChatBtn");
+const formPopup = document.getElementById("whatsappFormPopup");
+const closeBtn = formPopup.querySelector(".closeBtn");
+const sendBtn = document.getElementById("sendWhatsApp");
 
-  if (!name || !email || !message) {
-    alert("Please fill in all fields before sending!");
+// Toggle popup visibility
+chatBtn.addEventListener("click", () => {
+  formPopup.classList.toggle("show");
+});
+
+// Close popup
+closeBtn.addEventListener("click", () => {
+  formPopup.classList.remove("show");
+});
+
+// Send message to WhatsApp
+sendBtn.addEventListener("click", () => {
+  const name = document.getElementById("wName").value.trim();
+  const email = document.getElementById("wEmail").value.trim();
+  const message = document.getElementById("wMessage").value.trim();
+
+  if(!name || !email || !message){
+    alert("Please fill all fields!");
     return;
   }
 
-  const fullMessage = encodeURIComponent(`Hello Azeezah!\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
-  const whatsappNumber = "2349029765752"; // Your WhatsApp number in international format (no + or spaces)
+  const fullMessage = encodeURIComponent(
+    `Hello Azeezah!\nName: ${name}\nEmail: ${email}\nMessage: ${message}`
+  );
+
+  const whatsappNumber = "2349029765752"; // Your number
   const whatsappURL = `https://wa.me/${whatsappNumber}?text=${fullMessage}`;
 
-  // Create a temporary link and click it to ensure it works
-  const a = document.createElement('a');
-  a.href = whatsappURL;
-  a.target = "_blank";
-  a.click();
+  // Open WhatsApp
+  window.open(whatsappURL, "_blank");
+
+  // Close popup and clear form
+  formPopup.classList.remove("show");
+  document.getElementById("wName").value = "";
+  document.getElementById("wEmail").value = "";
+  document.getElementById("wMessage").value = "";
 });
 </script>
-
-
 
 
 
