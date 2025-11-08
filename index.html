@@ -199,7 +199,7 @@
             </div>
             <div class="field half">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" required />
+                <input type="email" name="email" id="email" required />
             </div>
             <div class="field">
                 <label for="message">Message</label>
@@ -214,22 +214,24 @@
 
 <script>
 document.getElementById("whatsappForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent normal form submission
+    e.preventDefault(); // Stop form from submitting normally
 
+    // Collect and encode form values
     const name = encodeURIComponent(document.getElementById("name").value);
     const email = encodeURIComponent(document.getElementById("email").value);
     const message = encodeURIComponent(document.getElementById("message").value);
 
+    // Construct message
     const fullMessage = `Hello Azeezah!%0AName: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
 
-    // Replace your phone number here in international format (no +)
-    const whatsappNumber = "2349029765752";
+    // WhatsApp number in international format (no +)
+    const whatsappNumber = "+234 9029765752";
 
+    // Open WhatsApp link in a new tab
     window.open(`https://wa.me/${whatsappNumber}?text=${fullMessage}`, "_blank");
 });
 </script>
 
-								<section>
     <ul class="contact">
         <li>
             <h3>Location</h3>
