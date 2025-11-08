@@ -205,33 +205,32 @@
       <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
     </div>
   </div>
-  <!-- Notice we use a normal button, not a form submit -->
   <button id="whatsappButton" class="button submit">Send Message</button>
 </section>
 
 <script>
-document.getElementById("whatsappButton").addEventListener("click", function(e) {
-  e.preventDefault(); // Stop any default action
-
-  const name = encodeURIComponent(document.getElementById("name").value);
-  const email = encodeURIComponent(document.getElementById("email").value);
-  const message = encodeURIComponent(document.getElementById("message").value);
+document.getElementById("whatsappButton").addEventListener("click", function() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
 
   if (!name || !email || !message) {
-    alert("Please fill all fields before sending!");
+    alert("Please fill in all fields before sending!");
     return;
   }
 
-  const fullMessage = `Hello Azeezah!%0AName: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
-  
-  // Your WhatsApp number (no + or spaces)
-  const whatsappNumber = "2349029765752";
-
-  // Open WhatsApp
+  const fullMessage = encodeURIComponent(`Hello Azeezah!\nName: ${name}\nEmail: ${email}\nMessage: ${message}`);
+  const whatsappNumber = "2349029765752"; // Your WhatsApp number in international format (no + or spaces)
   const whatsappURL = `https://wa.me/${whatsappNumber}?text=${fullMessage}`;
-  window.open(whatsappURL, "_blank");
+
+  // Create a temporary link and click it to ensure it works
+  const a = document.createElement('a');
+  a.href = whatsappURL;
+  a.target = "_blank";
+  a.click();
 });
 </script>
+
 
 
 
