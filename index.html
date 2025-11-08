@@ -195,15 +195,15 @@
         <div class="fields">
             <div class="field half">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name" required />
+                <input type="text" name="name" id="name" placeholder="Your Name" required />
             </div>
             <div class="field half">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" required />
+                <input type="email" name="email" id="email" placeholder="Your Email" required />
             </div>
             <div class="field">
                 <label for="message">Message</label>
-                <textarea name="message" id="message" rows="5" required></textarea>
+                <textarea name="message" id="message" rows="5" placeholder="Your Message" required></textarea>
             </div>
         </div>
         <ul class="actions">
@@ -214,23 +214,24 @@
 
 <script>
 document.getElementById("whatsappForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Stop form from submitting normally
+    e.preventDefault(); // Stop the form from submitting normally
 
-    // Collect and encode form values
+    // Get form values and encode them for WhatsApp
     const name = encodeURIComponent(document.getElementById("name").value);
     const email = encodeURIComponent(document.getElementById("email").value);
     const message = encodeURIComponent(document.getElementById("message").value);
 
-    // Construct message
+    // Construct WhatsApp message
     const fullMessage = `Hello Azeezah!%0AName: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
 
-    // WhatsApp number in international format (no +)
+    // Your WhatsApp number (international format, no + or spaces)
     const whatsappNumber = "2349029765752";
 
-    // Open WhatsApp link in a new tab
+    // Open WhatsApp in a new tab
     window.open(`https://wa.me/${whatsappNumber}?text=${fullMessage}`, "_blank");
 });
 </script>
+
 
     <ul class="contact">
         <li>
