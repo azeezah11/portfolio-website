@@ -211,29 +211,32 @@
 </section>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
+(function() {
   const form = document.getElementById("whatsappForm");
 
   form.addEventListener("submit", function(e) {
     e.preventDefault(); // Stop normal form submission
 
+    // Get form values
     const name = encodeURIComponent(document.getElementById("name").value);
     const email = encodeURIComponent(document.getElementById("email").value);
     const message = encodeURIComponent(document.getElementById("message").value);
 
+    // Construct WhatsApp message
     const fullMessage = `Hello Azeezah!%0AName: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
 
-    // Replace this with your WhatsApp number (no + or spaces)
+    // Your WhatsApp number in international format (no +, no spaces)
     const whatsappNumber = "2349029765752";
 
-    // Open WhatsApp Web or App
+    // Construct URL
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${fullMessage}`;
-    
-    // Open in new tab/window
+
+    // Open WhatsApp in new tab/window
     window.open(whatsappURL, "_blank");
   });
-});
+})();
 </script>
+
 
 
 
